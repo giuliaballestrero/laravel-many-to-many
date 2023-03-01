@@ -29,11 +29,11 @@
             <h2 class="card-title fw-bold p-3">
                 {{ $project->title }}
             </h2>
-
+            {{--Creo un if per visualizzare correttamente sia le url che le immagini uploadate--}}
             @if ( $project->isImageAUrl())
-            <img src="{{$project->thumb}}" class="card-img-top img-fluid" alt="{{$project->title}}">
+                <img src="{{$project->thumb}}" class="card-img-top img-fluid" alt="{{$project->title}}">
             @else
-            <img src="{{asset('storage/' . $project->thumb)}}" class="card-img-top img-fluid" alt="{{$project->title}}">
+                <img src="{{asset('storage/' . $project->thumb)}}" class="card-img-top img-fluid" alt="{{$project->title}}">
             @endif
 
             <p class="card-textpt-4 pt-4 mb-4">

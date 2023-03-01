@@ -43,7 +43,14 @@
                         <td>{{ $project->slug }}</td>
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->description }}</td>
-                        <td><img class="img-thumbnail" src="{{ $project->thumb }}" alt="{{ $project->title }}"></td>
+                        <td>
+                            {{--Creo un if per visualizzare correttamente sia le url che le immagini uploadate--}}
+                            @if ( $project->isImageAUrl())
+                                <img src="{{$project->thumb}}" class="img-thumbnail" alt="{{$project->title}}">
+                            @else
+                                <img src="{{asset('storage/' . $project->thumb)}}" class="img-thumbnail" alt="{{$project->title}}">
+                            @endif
+                        </td>
                         <td>{{ $project->creation_date }}</td>
                         <td>
                             {{--Creo un forelse per visualizzare tutti i tag per ogni post--}}
