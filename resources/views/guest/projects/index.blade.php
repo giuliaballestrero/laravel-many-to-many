@@ -24,9 +24,17 @@
                     {{ $project->description }}
                 </p>
                 <p class="fw-bold">
-                    Tag: {{$project->type}}
+                    Type: <a class="btn btn-disabled rounded-pill fw-bold ms-2" style="background-color: {{$project->type->color}}">{{$project->type->name}}<a>
                 </p>
+
+                {{--Per oogni progetto mostro i tag delle categorie--}}
+
+                <span class="fw-bold me-2">Made with (&hearts;): </span>
+                @foreach ($project->technologies as $technology )
+                   <a class="btn btn-disabled rounded-pill fw-bold me-2" style="background-color: {{$technology->bg_color}}">#{{$technology->name}}</a> 
+                @endforeach
             </div>
+            
             <div class="card-footer text-muted">
                 Created on {{ $project->creation_date }} - Proj. id: {{ $project->slug }}
             </div>
