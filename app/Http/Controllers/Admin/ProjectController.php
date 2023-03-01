@@ -89,6 +89,7 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->save();
+        $newProject->technologies()->sync($data['technologies']);
 
         //ritorno all'index
         return redirect()->route('admin.projects.index')->with('message', "Project $newProject->title has been created!")->with('alert-type', 'success');
@@ -156,7 +157,9 @@ class ProjectController extends Controller
         //dump($data); 
 
         //aggiorno i dati
-         $project->update($data);
+        $project->update($data);
+        $project->technologies()->sync($data['technologies']);
+        
 
         //ritorno sulla show
         return redirect()->route('admin.projects.show', compact('project'))->with('message', "$project->title has been edited")->with('alert-type', 'success');

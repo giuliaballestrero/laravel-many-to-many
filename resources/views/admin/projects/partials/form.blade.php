@@ -19,7 +19,7 @@
             @enderror         
         </div>
 
-        <div class="form-outline w-100 mb-3">
+        <div class="form-outline w-100 mb-4">
             <label for="Description<" class="form-label @error('description') is-invalid @enderror">Description</label>
             <input type="text" class="form-control" id="description" placeholder="Insert description" name="description" value="{{old('description', $project->description)}}">
             @error('description')
@@ -28,8 +28,27 @@
                 </div>
             @enderror                  
         </div>
+        {{--Aggiungo una checkbox per scegliere i tag delle technologies usate--}}
+        <div class="card p-3 shadow-none">
+        <p class="fw-bold">Used Technologies</p>
 
-        <div class="form-outline w-25 mb-3">
+        <div class="d-flex flex-wrap">
+
+            @foreach ($technologies as $technology)
+                <div>
+                    <input type="checkbox" class="form-check-input" name="technologies[]" value="{{ $technology->id }}"
+                {{--Controllo se ci sono errori sulla validation, definisco i valori da mantenere checked--}}
+                    @if ($errors->any())
+                        @checked(in_array($technology->id, old('technology',[])))
+                    @endif>
+
+                    <label class="form-check-label ms-2 me-5" for="technlogies">{{ $technology->name }}</label>
+                </div>
+            @endforeach
+        </div>
+        </div>
+
+        <div class="form-outline w-25 pt-4 mb-3">
             <label for="Thumb" class="form-label @error('thumb') is-invalid @enderror">Select image:</label>
             <input type="file" class="form-control" id="thumb" placeholder="Insert path" name="thumb" value="{{old('thumb', $project->thumb)}}">
         @error('thumb')
