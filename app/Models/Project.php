@@ -19,6 +19,12 @@ class Project extends Model
         return $this->belongsTo(Type::class);
     }
 
+    //definisco la relazione many to many (più projects possono avere più technologies)
+
+    public function technologies(){
+        return $this->belongsToMany(Technology::class);
+    }
+
     //uso la soft deletes
     use SoftDeletes;
 
