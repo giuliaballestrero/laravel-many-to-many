@@ -42,7 +42,7 @@
                         @checked(in_array($technology->id, old('technology',[])))
                     @endif>
 
-                    <label class="form-check-label ms-2 me-5" for="technlogies">{{ $technology->name }}</label>
+                    <label class="form-check-label ms-2 me-5" for="technologies">{{ $technology->name }}</label>
                 </div>
             @endforeach
         </div>

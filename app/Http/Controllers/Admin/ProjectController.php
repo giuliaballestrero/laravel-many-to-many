@@ -23,7 +23,7 @@ class ProjectController extends Controller
         'thumb' => 'required',
         'creation_date' => 'required|date',
         'type_id'=> 'required|exists:types,id',
-        'technology'=> 'array|exist:technologies,id'
+        'technologies'=> 'array|exists:technologies,id'
     ];
 
     protected $messages = [
