@@ -30,6 +30,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Thumb</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Technology</th>
                     <th scope="col">Type</th>
                     <th scope="col">Completed</th>
                     <th scope="col">Actions</th>
@@ -42,8 +43,16 @@
                         <td>{{ $project->slug }}</td>
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->description }}</td>
-                        <td>{{ $project->thumb }}</td>
+                        <td><img class="img-thumbnail" src="{{ $project->thumb }}" alt="{{ $project->title }}"></td>
                         <td>{{ $project->creation_date }}</td>
+                        <td>
+                            {{--Creo un forelse per visualizzare tutti i tag per ogni post--}}
+                            @forelse ( $project->technologies as $technology )
+                                <a class="btn btn-disabled rounded-pill fw-bold m-1">#{{$technology->name}}</a>
+                            @empty
+                                No technology selected.
+                            @endforelse
+                        </td>
                         <td>{{ $project->type->name }}</td>
                         <td class="text-center">
                             @if ($project->completed == 0)

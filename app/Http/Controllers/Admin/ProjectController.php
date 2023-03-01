@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -21,7 +22,8 @@ class ProjectController extends Controller
         'description' => 'required|min:8|max:200',
         'thumb' => 'required',
         'creation_date' => 'required|date',
-        'type_id'=> 'required|exists:types,id'
+        'type_id'=> 'required|exists:types,id',
+        'technology'=> 'array|exist:technologies,id'
     ];
 
     protected $messages = [
@@ -58,7 +60,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create', ["project"=> new Project(), 'types'=> Type::all()]);
+        return view('admin.projects.create', ["project"=> new Project(), 'types'=> Type::all(), 'technologies'=> Technology::all()]);
     }
 
     /**
@@ -115,7 +117,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project) //Uso la dependency injection al posto di passare l'id e fare find or fail
     {
-        return view('admin.projects.edit', compact('project'), ['types'=> Type::all()]);
+        return view('admin.projects.edit', compact('project'), ['types'=> Type::all(), 'technologies' => Technology::all()]);
     }
 
     /**
